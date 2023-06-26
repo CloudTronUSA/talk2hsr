@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Talk To HSR: Silver Wolf</title>
+    <link rel="shortcut icon" href="icon.png"/>
+    <link rel="apple-touch-icon" href="icon.png"/>
+    <link rel="mask-icon" href="icon.png"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="viewport-fit=cover">
+    <meta name="description" content="Talk to Silver Wolf in Honkai: Star Rail! Powered by GPT4">
+</head>
+<body>
+    <div class="bgvideo-container" id="bgvideo-container">
+        <video autoplay loop muted playsinline class="bgvideo" id="bgvideo">
+            <source src="background.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="frosted-glass"></div>
+    <div class="content chat-interface">
+        <div class="chat-header">
+            <div class="left">
+                <i class="fa fa-lg fa-comments" aria-hidden="true"></i>
+                <span>Message</span>
+            </div>
+            <div class="right">
+                <span>Powered By GPT-4 | </span>
+                <span id="session-id" style="color: #FF6B6BBF;">Disconnected</span>
+                <i id="session-status" class="fas fa-xmark fa-sm" style="color: #FF6B6BBF;padding-left: 2px;"></i>
+            </div>
+        </div>
+        <div class="chat-container">
+            <div class="sidebar">
+                <div class="users">
+                    <div class="user-container">
+                        <div class="user">
+                            <img src="silverwolf_pfp.png" alt="User Icon">
+                            <span>Silver Wolf</span>
+                            <i class="fas fa-chevron-right arrow"></i>
+                        </div>
+                        <div class="user-sub-box">
+                            <span>Conversation 01</span>
+                        </div>
+                        <div class="user-sub-box">
+                            <span>NOT AVAILABLE</span>
+                        </div>
+                    </div>
+                    <!-- More users here -->
+                    <div class="user-container">
+                        <div class="user setting">
+                            <i class="fas fa-solid fa-sliders fa-2xl setting-icon"></i>
+                            <span>Settings</span>
+                            <i class="fas fa-chevron-right arrow"></i>
+                        </div>
+                        <div class="setting-sub-box">
+                            <span id="ptID-display">PtID | NOT AVAILABLE</span>
+                        </div>
+                        <div class="setting-sub-box" style="height: auto;line-height: 1.1;">
+                            <span id="prompt-text" style="padding: 3px 0px 0px 0px;">Prompt: CURRENTLY NOT AVAILABLE</span>
+                        </div>
+                        <div class="setting-sub-box" style="height: auto;">
+                            <input type="text" id="ptID-input" placeholder="Enter New PtID" style="width: 80%;text-transform:uppercase;" maxlength="12">
+                            <button id="ptID-button" class="fa fa-edit"></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="disclaimer">
+                    Language model may produce inaccurate information about people, places, or facts. The quality of responses is not guaranteed. Conversations may be used for research purposes. Do not share private information!
+                </div>
+            </div>
+            <div class="chat-area">
+                <div class="chat-area-header">
+                    <span class="title">Silver Wolf</span>
+                    <br>
+                    <span class="sign">Don't make a game if you don't know how to.</span>
+                </div>
+                <div id="chat-dialogue">
+                    <!-- Dialogue here -->
+                </div>
+                <div class="chat-type-area">
+                    <div id="message-input">
+                        <textarea id="chat-input" placeholder="Type a message..."></textarea>
+                        <button id="sendButton" class="send-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <button id="regenButton" class="send-button">
+                            <i class="fas fa-rotate-right"></i>
+                        </button>
+                    </div>
+                    <div id="generating">
+                        <span>Generating...</span>
+                    </div>
+                    <div id="feedback">
+                        <span>Feedback: </span>
+                        <input type="text" id="feedbackInput" placeholder="(Optional)">
+                        <button id="positiveButton">
+                          <i class="fas fa-thumbs-up"></i>
+                        </button>
+                        <button id="negativeButton">
+                          <i class="fas fa-thumbs-down"></i>
+                        </button>
+                        <button id="regenerateButton">
+                            <i class="fas fa-rotate-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
