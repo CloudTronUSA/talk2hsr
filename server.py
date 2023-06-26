@@ -12,6 +12,7 @@ import openai
 import uuid
 
 OPENAI_AUTHKEY = '<填入你的 OpenAI APIKey>'
+ENABLE_GPT4 = True    # enable GPT-4
 
 app = Flask(__name__)
 CORS(app)
@@ -115,8 +116,12 @@ def llm_generate(session_id, prompt, length=256, temperature=0.9, top_p=1.0, top
 
 # update the prompt with feedback
 def update_prompt(task_id,session_id,feedback,feedback_text):
-        global tasks, prompts, sessions
-    #try:
+    global tasks, prompts, sessions
+    if ENABLE_GPT4 == False:
+        tasks[task_id]['status'] = '0'
+        print(f'# RL Finetune #\nError updating prompt for session {session_id}')
+        print('You must have access and enabled GPT-4 to use RL Finetune.')
+    try:
         print('\n# RL Finetune #')
         if sessions[session_id]['prompt_id'] == 'DEFAULT':        
             # assign a new prompt
@@ -142,11 +147,11 @@ def update_prompt(task_id,session_id,feedback,feedback_text):
         save_data(prompts=prompts)
         print(f'# RL Finetune #\nPrompt {prompt_id} updated for session {session_id}\n')
         #print(f'New Prompt: {agent.generator.instruction}\n')
-    #except Exception as e:
-        #print(f'# RL Finetune #\nError updating prompt for session {session_id}')
-        #tasks[task_id]['status'] = '0'  # error
-        #print(e)
-        #print()
+    except Exception as e:
+        print(f'# RL Finetune #\nError updating prompt for session {session_id}')
+        tasks[task_id]['status'] = '0'  # error
+        print(e)
+        print()
 
 #@app.before_request
 #def initialize():
@@ -195,7 +200,7 @@ def gen():
     agent.generator.instruction = prompts[prompt_id]['prompt']
     agent.generator.body = sessions[session_id]['history_msg']
     # generate response
-    response = agent.generate(message=message, use_gpt4=True)
+    response = agent.generate(message=message, use_gpt4=ENABLE_GPT4)
     # pull out information from agent
     sessions[session_id]['history_msg'] = agent.generator.body
     save_data(sessions=sessions)
@@ -219,7 +224,7 @@ def regen():
     agent.generator.instruction = prompts[prompt_id]['prompt']
     agent.generator.body = sessions[session_id]['history_msg']
     # generate response
-    response = agent.regenerate(use_gpt4=True)
+    response = agent.regenerate(use_gpt4=ENABLE_GPT4)
     # pull out information from agent
     sessions[session_id]['history_msg'] = agent.generator.body
     save_data(sessions=sessions)
