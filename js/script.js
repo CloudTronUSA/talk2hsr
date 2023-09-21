@@ -4,8 +4,8 @@ var sessionId;
 var promptId;
 
 // Define the avatar URLs
-const LOCAL_USER_AVATAR = "user_pfp.png";
-const REMOTE_USER_AVATAR = "silverwolf_pfp.png";
+const LOCAL_USER_AVATAR = "assets/user_pfp.png";
+const REMOTE_USER_AVATAR = "assets/silverwolf_pfp.png";
 const SERVER_URL = "http://localhost:8008";
 
 const chatInput = document.getElementById('chat-input');

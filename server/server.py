@@ -11,7 +11,7 @@ import json
 import openai
 import uuid
 
-OPENAI_AUTHKEY = '<填入你的 OpenAI APIKey>'
+OPENAI_AUTHKEY = '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'
 ENABLE_GPT4 = True    # enable GPT-4
 
 app = Flask(__name__)
